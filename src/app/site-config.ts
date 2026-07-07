@@ -101,14 +101,14 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  partnerOne: 'Alex',
-  partnerTwo: 'Jordan',
-  monogram: 'A & J',
-  hashtag: '#AlexEJordan2026',
+  partnerOne: 'Ariane',
+  partnerTwo: 'Rodrigo',
+  monogram: 'A & R',
+  hashtag: '#ArianeERodrigo2027',
 
-  weddingDateISO: '2026-09-19T16:00:00',
-  displayDate: 'Sábado, 19 de setembro de 2026',
-  displayTime: 'Às quatro horas da tarde',
+  weddingDateISO: '2027-03-12T18:00:00',
+  displayDate: 'Sexta-feira, 12 de março de 2027',
+  displayTime: 'Às dezoito horas',
   location: 'Toscana, Itália',
   invitationLine: 'Junto de suas famílias, convidam você para celebrar o seu casamento',
 
