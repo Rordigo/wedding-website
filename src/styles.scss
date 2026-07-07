@@ -1,0 +1,182 @@
+/* ============================================================
+   Global theme for the wedding site
+   Bootstrap loads first (see angular.json); this file overrides it.
+   ============================================================ */
+
+:root {
+  /* Palette — soft, romantic, timeless. Tweak to match your colours. */
+  --cream: #faf6f0;
+  --sand: #f1e9dd;
+  --blush: #efe1dc;
+  --sage: #8a9a7b;
+  --sage-dark: #5e6d4f;
+  --gold: #bd9a5f;
+  --gold-dark: #a07f45;
+  --ink: #3b3a36;
+  --muted: #8c857b;
+  --white: #ffffff;
+
+  /* Typography */
+  --font-script: 'Great Vibes', cursive;
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body: 'Lato', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Re-skin Bootstrap components */
+  --bs-primary: var(--sage-dark);
+  --bs-body-font-family: var(--font-body);
+  --bs-body-color: var(--ink);
+  --bs-link-color: var(--sage-dark);
+  --bs-link-hover-color: var(--gold-dark);
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Offset anchor jumps so the fixed navbar doesn't cover section titles */
+  scroll-padding-top: 72px;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background-color: var(--cream);
+  font-weight: 400;
+  line-height: 1.75;
+  letter-spacing: 0.01em;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* ---- Section scaffolding ---------------------------------- */
+.section {
+  padding: clamp(4rem, 9vw, 8rem) 0;
+  position: relative;
+}
+
+.section--tight {
+  padding: clamp(3rem, 6vw, 5rem) 0;
+}
+
+.bg-cream { background-color: var(--cream); }
+.bg-sand  { background-color: var(--sand); }
+.bg-blush { background-color: var(--blush); }
+.bg-sage  { background-color: var(--sage); }
+
+.section-eyebrow {
+  font-family: var(--font-script);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  color: var(--gold-dark);
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  color: var(--muted);
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+/* Small ornamental divider */
+.ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 1rem auto 2.5rem;
+  color: var(--gold);
+}
+.ornament::before,
+.ornament::after {
+  content: '';
+  display: block;
+  width: clamp(2rem, 8vw, 4.5rem);
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold));
+}
+.ornament::after {
+  background: linear-gradient(to left, transparent, var(--gold));
+}
+.ornament i { font-size: 1.1rem; }
+
+/* ---- Buttons ---------------------------------------------- */
+.btn-wedding {
+  --bs-btn-padding-x: 2rem;
+  --bs-btn-padding-y: 0.7rem;
+  background-color: var(--sage-dark);
+  border: 1px solid var(--sage-dark);
+  color: #fff;
+  font-family: var(--font-body);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  border-radius: 2rem;
+  transition: all 0.25s ease;
+}
+.btn-wedding:hover,
+.btn-wedding:focus {
+  background-color: var(--gold-dark);
+  border-color: var(--gold-dark);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(94, 109, 79, 0.25);
+}
+
+.btn-wedding-outline {
+  --bs-btn-padding-x: 2rem;
+  --bs-btn-padding-y: 0.7rem;
+  background-color: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold-dark);
+  font-family: var(--font-body);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  border-radius: 2rem;
+  transition: all 0.25s ease;
+}
+.btn-wedding-outline:hover,
+.btn-wedding-outline:focus {
+  background-color: var(--gold-dark);
+  border-color: var(--gold-dark);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.text-script {
+  font-family: var(--font-script);
+  color: var(--gold-dark);
+}
+
+/* ---- Scroll-reveal animation ------------------------------ */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
