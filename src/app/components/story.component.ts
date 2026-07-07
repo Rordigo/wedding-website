@@ -10,7 +10,7 @@ import { siteConfig } from '../site-config';
     <section id="story" class="section bg-cream">
       <div class="container">
         <div class="text-center" appReveal>
-          <p class="section-eyebrow">Our Journey</p>
+          <p class="section-eyebrow">Nossa Jornada</p>
           <h2 class="section-title">{{ cfg.story.heading }}</h2>
           <div class="ornament"><i class="bi bi-suit-heart-fill"></i></div>
           <p class="section-subtitle mb-5">{{ cfg.story.intro }}</p>

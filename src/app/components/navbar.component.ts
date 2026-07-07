@@ -19,7 +19,7 @@ import { siteConfig } from '../site-config';
           data-bs-target="#navMenu"
           aria-controls="navMenu"
           aria-expanded="false"
-          aria-label="Toggle navigation"
+          aria-label="Alternar navegação"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -43,7 +43,7 @@ import { siteConfig } from '../site-config';
                 href="#rsvp"
                 data-bs-toggle="collapse"
                 data-bs-target="#navMenu"
-                >RSVP</a
+                >Confirmar Presença</a
               >
             </li>
           </ul>
@@ -128,14 +128,14 @@ export class NavbarComponent {
   readonly scrolled = signal(false);
 
   readonly links = [
-    { label: 'Home', href: '#home' },
-    { label: 'Our Story', href: '#story' },
-    { label: 'Details', href: '#details' },
-    { label: 'Schedule', href: '#schedule' },
-    { label: 'Gallery', href: '#gallery' },
-    { label: 'Travel', href: '#travel' },
-    { label: 'Registry', href: '#registry' },
-    { label: 'FAQ', href: '#faq' },
+    { label: 'Início', href: '#home' },
+    { label: 'Nossa História', href: '#story' },
+    { label: 'Detalhes', href: '#details' },
+    { label: 'Programação', href: '#schedule' },
+    { label: 'Galeria', href: '#gallery' },
+    { label: 'Hospedagem', href: '#travel' },
+    { label: 'Presentes', href: '#registry' },
+    { label: 'Dúvidas', href: '#faq' },
   ];
 
   @HostListener('window:scroll')

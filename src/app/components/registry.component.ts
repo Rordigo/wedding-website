@@ -10,8 +10,8 @@ import { siteConfig } from '../site-config';
     <section id="registry" class="section bg-cream">
       <div class="container">
         <div class="text-center" appReveal>
-          <p class="section-eyebrow">With Gratitude</p>
-          <h2 class="section-title">Gifts &amp; Registry</h2>
+          <p class="section-eyebrow">Com Gratidão</p>
+          <h2 class="section-title">Presentes &amp; Lista</h2>
           <div class="ornament"><i class="bi bi-gift"></i></div>
           <p class="section-subtitle mb-5">{{ cfg.registry.intro }}</p>
         </div>
@@ -29,7 +29,7 @@ import { siteConfig } from '../site-config';
                 <div class="registry-icon"><i class="bi" [class]="item.icon"></i></div>
                 <h3 class="registry-title">{{ item.name }}</h3>
                 <p class="text-muted mb-3">{{ item.description }}</p>
-                <span class="registry-cta">Visit <i class="bi bi-arrow-up-right ms-1"></i></span>
+                <span class="registry-cta">Acessar <i class="bi bi-arrow-up-right ms-1"></i></span>
               </a>
             </div>
           }

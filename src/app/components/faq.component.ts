@@ -10,8 +10,8 @@ import { siteConfig } from '../site-config';
     <section id="faq" class="section bg-sand">
       <div class="container">
         <div class="text-center" appReveal>
-          <p class="section-eyebrow">Good to Know</p>
-          <h2 class="section-title">Questions &amp; Answers</h2>
+          <p class="section-eyebrow">Bom Saber</p>
+          <h2 class="section-title">Perguntas &amp; Respostas</h2>
           <div class="ornament"><i class="bi bi-patch-question"></i></div>
         </div>
 

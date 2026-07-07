@@ -10,8 +10,8 @@ import { siteConfig } from '../site-config';
     <section id="rsvp" class="section rsvp-section text-center">
       <div class="container">
         <div appReveal>
-          <p class="section-eyebrow text-light-gold">Join Us</p>
-          <h2 class="section-title text-white">RSVP</h2>
+          <p class="section-eyebrow text-light-gold">Participe</p>
+          <h2 class="section-title text-white">Confirme sua Presença</h2>
           <div class="ornament ornament--light"><i class="bi bi-envelope-heart"></i></div>
           <p class="rsvp-intro mx-auto">{{ cfg.rsvp.intro }}</p>
           <p class="rsvp-deadline">{{ cfg.rsvp.deadline }}</p>
@@ -21,7 +21,7 @@ import { siteConfig } from '../site-config';
             rel="noopener"
             class="btn btn-rsvp mt-3"
           >
-            <i class="bi bi-pencil-square me-2"></i>Respond Now
+            <i class="bi bi-pencil-square me-2"></i>Confirmar Agora
           </a>
         </div>
       </div>

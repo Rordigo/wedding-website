@@ -10,8 +10,8 @@ import { siteConfig } from '../site-config';
     <section id="travel" class="section bg-sand">
       <div class="container">
         <div class="text-center" appReveal>
-          <p class="section-eyebrow">Plan Your Stay</p>
-          <h2 class="section-title">Travel &amp; Accommodation</h2>
+          <p class="section-eyebrow">Planeje sua Estadia</p>
+          <h2 class="section-title">Viagem &amp; Hospedagem</h2>
           <div class="ornament"><i class="bi bi-signpost-2"></i></div>
           <p class="section-subtitle mb-5">{{ cfg.travel.intro }}</p>
         </div>
@@ -31,7 +31,7 @@ import { siteConfig } from '../site-config';
                   }
                   @if (place.mapUrl) {
                     <a [href]="place.mapUrl" target="_blank" rel="noopener" class="travel-link">
-                      <i class="bi bi-geo-alt me-1"></i>View on map
+                      <i class="bi bi-geo-alt me-1"></i>Ver no mapa
                     </a>
                   }
                 </div>

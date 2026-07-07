@@ -36,32 +36,32 @@ interface Countdown {
 
         <!-- Countdown -->
         @if (!countdown().passed) {
-          <div class="countdown" aria-label="Countdown to the wedding day">
+          <div class="countdown" aria-label="Contagem regressiva para o casamento">
             <div class="count-box">
               <span class="count-num">{{ countdown().days }}</span>
-              <span class="count-label">Days</span>
+              <span class="count-label">Dias</span>
             </div>
             <div class="count-box">
               <span class="count-num">{{ pad(countdown().hours) }}</span>
-              <span class="count-label">Hours</span>
+              <span class="count-label">Horas</span>
             </div>
             <div class="count-box">
               <span class="count-num">{{ pad(countdown().minutes) }}</span>
-              <span class="count-label">Minutes</span>
+              <span class="count-label">Minutos</span>
             </div>
             <div class="count-box">
               <span class="count-num">{{ pad(countdown().seconds) }}</span>
-              <span class="count-label">Seconds</span>
+              <span class="count-label">Segundos</span>
             </div>
           </div>
         } @else {
-          <p class="just-married">We're married! Thank you for celebrating with us. 💍</p>
+          <p class="just-married">Nós nos casamos! Obrigado por celebrar conosco. 💍</p>
         }
 
-        <a href="#rsvp" class="btn btn-wedding mt-4">RSVP</a>
+        <a href="#rsvp" class="btn btn-wedding mt-4">Confirmar Presença</a>
       </div>
 
-      <a href="#story" class="scroll-cue" aria-label="Scroll down">
+      <a href="#story" class="scroll-cue" aria-label="Rolar para baixo">
         <i class="bi bi-chevron-down"></i>
       </a>
     </header>

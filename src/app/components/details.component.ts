@@ -10,8 +10,8 @@ import { siteConfig } from '../site-config';
     <section id="details" class="section bg-sand">
       <div class="container">
         <div class="text-center" appReveal>
-          <p class="section-eyebrow">When &amp; Where</p>
-          <h2 class="section-title">The Celebration</h2>
+          <p class="section-eyebrow">Quando &amp; Onde</p>
+          <h2 class="section-title">A Celebração</h2>
           <div class="ornament"><i class="bi bi-calendar2-heart"></i></div>
           <p class="section-subtitle mb-2">{{ cfg.displayDate }}</p>
           <p class="text-muted mb-5">{{ cfg.displayTime }}</p>
@@ -36,7 +36,7 @@ import { siteConfig } from '../site-config';
                     target="_blank"
                     rel="noopener"
                   >
-                    <i class="bi bi-geo-alt me-1"></i> View Map
+                    <i class="bi bi-geo-alt me-1"></i> Ver Mapa
                   </a>
                 }
               </div>

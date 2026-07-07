@@ -15,7 +15,7 @@ import { siteConfig } from '../site-config';
         }
         <div class="footer-rule"></div>
         <p class="footer-credit">
-          Made with <i class="bi bi-heart-fill"></i> for {{ cfg.partnerOne }} &amp;
+          Feito com <i class="bi bi-heart-fill"></i> para {{ cfg.partnerOne }} &amp;
           {{ cfg.partnerTwo }}
         </p>
       </div>

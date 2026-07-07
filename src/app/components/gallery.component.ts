@@ -10,8 +10,8 @@ import { siteConfig } from '../site-config';
     <section id="gallery" class="section bg-blush">
       <div class="container">
         <div class="text-center" appReveal>
-          <p class="section-eyebrow">Moments</p>
-          <h2 class="section-title">Our Gallery</h2>
+          <p class="section-eyebrow">Momentos</p>
+          <h2 class="section-title">Nossa Galeria</h2>
           <div class="ornament"><i class="bi bi-camera"></i></div>
         </div>
 
@@ -32,7 +32,7 @@ import { siteConfig } from '../site-config';
 
         <p class="text-center text-muted small mt-4 mb-0">
           <i class="bi bi-info-circle me-1"></i>
-          Add your own photos to <code>public/images/</code> and reference them in
+          Adicione suas próprias fotos em <code>public/images/</code> e referencie-as em
           <code>site-config.ts</code>.
         </p>
       </div>

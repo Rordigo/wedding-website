@@ -10,8 +10,8 @@ import { siteConfig } from '../site-config';
     <section id="schedule" class="section bg-cream">
       <div class="container">
         <div class="text-center" appReveal>
-          <p class="section-eyebrow">The Day</p>
-          <h2 class="section-title">Order of Events</h2>
+          <p class="section-eyebrow">O Dia</p>
+          <h2 class="section-title">Programação do Dia</h2>
           <div class="ornament"><i class="bi bi-clock-history"></i></div>
         </div>
 

@@ -1,24 +1,24 @@
 /**
  * ─────────────────────────────────────────────────────────────────────────
- *  ✦  EDIT YOUR WEDDING DETAILS HERE  ✦
+ *  ✦  EDITE OS DETALHES DO SEU CASAMENTO AQUI  ✦
  * ─────────────────────────────────────────────────────────────────────────
- *  This is the ONLY file most people need to touch. Change the text, dates,
- *  links and image paths below and the whole site updates.
+ *  Este é o ÚNICO arquivo que a maioria das pessoas precisa alterar. Mude os
+ *  textos, datas, links e caminhos de imagem abaixo e o site inteiro atualiza.
  *
- *  Photos: drop your images into  src/../public/images/  and reference them
- *  as  'images/your-photo.jpg'. Any gallery item left with src: '' shows an
- *  elegant placeholder tile instead, so the site looks finished before your
- *  photos are ready.
+ *  Fotos: coloque suas imagens em  src/../public/images/  e referencie-as
+ *  como  'images/sua-foto.jpg'. Qualquer item da galeria deixado com src: ''
+ *  mostra um bloco decorativo no lugar, então o site fica com aparência
+ *  finalizada mesmo antes de as fotos estarem prontas.
  * ─────────────────────────────────────────────────────────────────────────
  */
 
 export interface EventDetail {
   title: string;
-  icon: string; // Bootstrap Icons class, e.g. 'bi-heart'
+  icon: string; // Classe do Bootstrap Icons, ex.: 'bi-heart'
   time: string;
   venue: string;
   address: string;
-  mapUrl: string; // Google Maps link, or '' to hide the button
+  mapUrl: string; // Link do Google Maps, ou '' para esconder o botão
   note?: string;
 }
 
@@ -30,7 +30,7 @@ export interface ScheduleItem {
 }
 
 export interface GalleryItem {
-  src: string; // 'images/photo.jpg'  — leave '' for a placeholder tile
+  src: string; // 'images/foto.jpg'  — deixe '' para um bloco decorativo
   caption: string;
 }
 
@@ -56,18 +56,18 @@ export interface StoryMilestone {
 export interface SiteConfig {
   partnerOne: string;
   partnerTwo: string;
-  /** Short combined title used in the browser tab & navbar, e.g. "A & B" */
+  /** Título curto combinado usado na aba do navegador e no menu, ex.: "A & B" */
   monogram: string;
   hashtag: string;
 
-  /** ISO date/time of the ceremony — powers the countdown. Keep the T + time. */
+  /** Data/hora ISO da cerimônia — alimenta a contagem regressiva. Mantenha o T + hora. */
   weddingDateISO: string;
   displayDate: string;
   displayTime: string;
   location: string;
   invitationLine: string;
 
-  heroImage: string; // 'images/hero.jpg' — leave '' for an elegant gradient
+  heroImage: string; // 'images/hero.jpg' — deixe '' para um degradê elegante
 
   story: {
     heading: string;
@@ -82,7 +82,7 @@ export interface SiteConfig {
   rsvp: {
     intro: string;
     deadline: string;
-    googleFormUrl: string; // paste your Google Form share link here
+    googleFormUrl: string; // cole aqui o link de compartilhamento do seu Google Forms
   };
 
   registry: {
@@ -104,152 +104,152 @@ export const siteConfig: SiteConfig = {
   partnerOne: 'Alex',
   partnerTwo: 'Jordan',
   monogram: 'A & J',
-  hashtag: '#AlexAndJordan2026',
+  hashtag: '#AlexEJordan2026',
 
   weddingDateISO: '2026-09-19T16:00:00',
-  displayDate: 'Saturday, September 19, 2026',
-  displayTime: 'Four o’clock in the afternoon',
-  location: 'Tuscany, Italy',
-  invitationLine: 'Together with their families, invite you to celebrate their wedding',
+  displayDate: 'Sábado, 19 de setembro de 2026',
+  displayTime: 'Às quatro horas da tarde',
+  location: 'Toscana, Itália',
+  invitationLine: 'Junto de suas famílias, convidam você para celebrar o seu casamento',
 
-  heroImage: '', // e.g. 'images/hero.jpg'
+  heroImage: '', // ex.: 'images/hero.jpg'
 
   story: {
-    heading: 'Our Story',
+    heading: 'Nossa História',
     intro:
-      'Every love story is beautiful, but ours is our favourite. Here are a few of the moments that brought us here.',
+      'Toda história de amor é bonita, mas a nossa é a nossa favorita. Aqui estão alguns dos momentos que nos trouxeram até aqui.',
     milestones: [
       {
-        title: 'How We Met',
-        date: 'Spring 2019',
+        title: 'Como Nos Conhecemos',
+        date: 'Primavera de 2019',
         icon: 'bi-cup-hot',
         text:
-          'We were introduced by mutual friends at a tiny coffee shop downtown. One flat white turned into a three-hour conversation, and neither of us wanted it to end.',
+          'Fomos apresentados por amigos em comum em uma pequena cafeteria no centro. Um café virou uma conversa de três horas, e nenhum de nós queria que aquilo terminasse.',
       },
       {
-        title: 'Our First Trip',
-        date: 'Summer 2021',
+        title: 'Nossa Primeira Viagem',
+        date: 'Verão de 2021',
         icon: 'bi-airplane',
         text:
-          'A spontaneous weekend by the coast became the trip that made us realise we wanted to see the whole world together — starting side by side.',
+          'Um fim de semana espontâneo no litoral se tornou a viagem que nos fez perceber que queríamos conhecer o mundo inteiro juntos — lado a lado.',
       },
       {
-        title: 'The Proposal',
-        date: 'Winter 2025',
+        title: 'O Pedido',
+        date: 'Inverno de 2025',
         icon: 'bi-gem',
         text:
-          'On a quiet snowy evening, in the place where we had our very first date, one of us got down on one knee. The answer, of course, was an easy yes.',
+          'Em uma noite tranquila de inverno, no lugar do nosso primeiro encontro, um de nós se ajoelhou. A resposta, é claro, foi um sim sem hesitar.',
       },
     ],
   },
 
   events: [
     {
-      title: 'The Ceremony',
+      title: 'A Cerimônia',
       icon: 'bi-heart',
-      time: '4:00 PM – 5:00 PM',
-      venue: 'Chapel of San Lorenzo',
-      address: 'Via delle Colline 12, Tuscany, Italy',
+      time: '16h00 – 17h00',
+      venue: 'Capela de San Lorenzo',
+      address: 'Via delle Colline 12, Toscana, Itália',
       mapUrl: 'https://maps.google.com',
-      note: 'Please arrive 30 minutes early to be seated.',
+      note: 'Por favor, chegue 30 minutos antes para se acomodar.',
     },
     {
-      title: 'The Reception',
+      title: 'A Recepção',
       icon: 'bi-cup-straw',
-      time: '6:00 PM – late',
+      time: '18h00 – até o fim',
       venue: 'Villa dei Cipressi',
-      address: 'Strada del Vino 8, Tuscany, Italy',
+      address: 'Strada del Vino 8, Toscana, Itália',
       mapUrl: 'https://maps.google.com',
-      note: 'Dinner, dancing and celebration under the stars.',
+      note: 'Jantar, dança e celebração sob as estrelas.',
     },
   ],
 
   schedule: [
-    { time: '3:30 PM', title: 'Guest Arrival', description: 'Welcome drinks on the terrace.', icon: 'bi-people' },
-    { time: '4:00 PM', title: 'Ceremony', description: 'The moment we say "I do".', icon: 'bi-heart' },
-    { time: '5:00 PM', title: 'Cocktail Hour', description: 'Canapés, music and photographs.', icon: 'bi-cup-straw' },
-    { time: '6:30 PM', title: 'Dinner', description: 'A seated dinner with speeches.', icon: 'bi-egg-fried' },
-    { time: '8:30 PM', title: 'First Dance', description: 'Followed by dancing all night.', icon: 'bi-music-note-beamed' },
-    { time: '11:30 PM', title: 'Farewell', description: 'A sparkler send-off for the couple.', icon: 'bi-stars' },
+    { time: '15h30', title: 'Chegada dos Convidados', description: 'Drinks de boas-vindas no terraço.', icon: 'bi-people' },
+    { time: '16h00', title: 'Cerimônia', description: 'O momento em que dizemos "sim".', icon: 'bi-heart' },
+    { time: '17h00', title: 'Hora do Coquetel', description: 'Canapés, música e fotografias.', icon: 'bi-cup-straw' },
+    { time: '18h30', title: 'Jantar', description: 'Um jantar à mesa com discursos.', icon: 'bi-egg-fried' },
+    { time: '20h30', title: 'Primeira Dança', description: 'Seguida de dança a noite toda.', icon: 'bi-music-note-beamed' },
+    { time: '23h30', title: 'Despedida', description: 'Uma despedida com estrelinhas para o casal.', icon: 'bi-stars' },
   ],
 
   gallery: [
-    { src: '', caption: 'The day we got engaged' },
-    { src: '', caption: 'Our first holiday together' },
-    { src: '', caption: 'Sunday mornings' },
-    { src: '', caption: 'Celebrating with family' },
-    { src: '', caption: 'Adventures abroad' },
-    { src: '', caption: 'Just the two of us' },
+    { src: '', caption: 'O dia em que ficamos noivos' },
+    { src: '', caption: 'Nossas primeiras férias juntos' },
+    { src: '', caption: 'Manhãs de domingo' },
+    { src: '', caption: 'Comemorando com a família' },
+    { src: '', caption: 'Aventuras pelo mundo' },
+    { src: '', caption: 'Só nós dois' },
   ],
 
   rsvp: {
     intro:
-      'We would be honoured to have you celebrate with us. Kindly let us know if you can make it.',
-    deadline: 'Please respond by August 1, 2026',
-    googleFormUrl: 'https://forms.gle/your-google-form-link', // ← paste your Google Form link
+      'Seria uma honra ter você celebrando conosco. Por favor, avise-nos se poderá comparecer.',
+    deadline: 'Por favor, confirme até 1º de agosto de 2026',
+    googleFormUrl: 'https://forms.gle/your-google-form-link', // ← cole aqui o link do seu Google Forms
   },
 
   registry: {
     intro:
-      'Your presence is the greatest gift of all. But if you wish to give something, we have put together a few ideas below.',
+      'Sua presença já é o maior presente de todos. Mas, se desejar presentear, reunimos algumas ideias abaixo.',
     items: [
-      { name: 'Honeymoon Fund', description: 'Help send us off on our dream honeymoon.', url: 'https://example.com', icon: 'bi-airplane-engines' },
-      { name: 'Home Registry', description: 'A few things for our first home together.', url: 'https://example.com', icon: 'bi-house-heart' },
-      { name: 'Charity Donation', description: 'Give to a cause close to our hearts.', url: 'https://example.com', icon: 'bi-heart-pulse' },
+      { name: 'Cota de Lua de Mel', description: 'Ajude-nos a realizar a lua de mel dos nossos sonhos.', url: 'https://example.com', icon: 'bi-airplane-engines' },
+      { name: 'Lista para o Lar', description: 'Algumas coisas para o nosso primeiro lar juntos.', url: 'https://example.com', icon: 'bi-house-heart' },
+      { name: 'Doação para Caridade', description: 'Contribua para uma causa querida ao nosso coração.', url: 'https://example.com', icon: 'bi-heart-pulse' },
     ],
   },
 
   travel: {
-    intro: 'Coming from out of town? Here are a few places we recommend for your stay.',
+    intro: 'Vindo de fora da cidade? Aqui estão alguns lugares que recomendamos para a sua estadia.',
     items: [
       {
         title: 'Hotel Bellavista',
         icon: 'bi-building',
-        time: 'From €140 / night',
-        venue: '10 minutes from the venue',
-        address: 'Piazza Centrale 3, Tuscany, Italy',
+        time: 'A partir de €140 / noite',
+        venue: 'A 10 minutos do local',
+        address: 'Piazza Centrale 3, Toscana, Itália',
         mapUrl: 'https://maps.google.com',
-        note: 'Mention our names for a special group rate.',
+        note: 'Mencione nossos nomes para uma tarifa especial de grupo.',
       },
       {
         title: 'La Casa Verde B&B',
         icon: 'bi-cup-hot',
-        time: 'From €90 / night',
-        venue: '15 minutes from the venue',
-        address: 'Via dei Fiori 22, Tuscany, Italy',
+        time: 'A partir de €90 / noite',
+        venue: 'A 15 minutos do local',
+        address: 'Via dei Fiori 22, Toscana, Itália',
         mapUrl: 'https://maps.google.com',
-        note: 'A cosy, family-run guesthouse.',
+        note: 'Uma pousada aconchegante, de administração familiar.',
       },
     ],
   },
 
   faqs: [
     {
-      question: 'What should I wear?',
+      question: 'O que devo vestir?',
       answer:
-        'The dress code is formal / black tie optional. Think elegant — long dresses and suits. The ceremony and reception are partly outdoors on grass, so choose your footwear accordingly.',
+        'O traje é formal / black tie opcional. Pense em algo elegante — vestidos longos e ternos. A cerimônia e a recepção acontecem parcialmente ao ar livre, sobre a grama, então escolha os sapatos de acordo.',
     },
     {
-      question: 'Can I bring a plus one?',
+      question: 'Posso levar um acompanhante?',
       answer:
-        'Due to limited space, we are only able to accommodate the guests named on your invitation. Your RSVP form will show how many seats we have reserved for you.',
+        'Devido ao espaço limitado, só conseguimos acomodar os convidados nomeados no seu convite. O formulário de confirmação mostrará quantos lugares reservamos para você.',
     },
     {
-      question: 'Are children welcome?',
+      question: 'As crianças são bem-vindas?',
       answer:
-        'We love your little ones, but this will be an adults-only celebration so that everyone can relax and enjoy the evening.',
+        'Amamos os pequenos, mas esta será uma celebração apenas para adultos, para que todos possam relaxar e aproveitar a noite.',
     },
     {
-      question: 'Is there parking?',
+      question: 'Há estacionamento?',
       answer:
-        'Yes, free parking is available at both the ceremony and reception venues. We also recommend arranging a taxi if you plan to enjoy the wine.',
+        'Sim, há estacionamento gratuito nos locais da cerimônia e da recepção. Também recomendamos combinar um táxi caso pretenda aproveitar os vinhos.',
     },
     {
-      question: 'What time should I arrive?',
+      question: 'Que horas devo chegar?',
       answer:
-        'Please aim to arrive by 3:30 PM so you can find your seat before the ceremony begins promptly at 4:00 PM.',
+        'Por favor, procure chegar até as 15h30 para encontrar seu lugar antes de a cerimônia começar, pontualmente às 16h00.',
     },
   ],
 
-  footerMessage: 'We can’t wait to celebrate with you.',
+  footerMessage: 'Mal podemos esperar para celebrar com você.',
 };
