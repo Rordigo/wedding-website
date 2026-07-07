@@ -33,11 +33,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # base-href is set to the repository name so links work at
-      # https://<user>.github.io/<repo>/ . If you use a custom domain,
-      # change this to  --base-href "/".
+      # Served at the root of the custom domain (www.arianeerodrigo.site),
+      # so base-href is "/". The public/CNAME file sets the custom domain.
+      # (If you ever drop the custom domain, change this back to
+      #  --base-href "/${{ github.event.repository.name }}/".)
       - name: Build
-        run: npm run build -- --base-href "/${{ github.event.repository.name }}/"
+        run: npm run build -- --base-href "/"
 
       # GitHub Pages has no server-side routing; serve the SPA for any path.
       - name: Add SPA 404 fallback

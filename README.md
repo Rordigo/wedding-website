@@ -77,11 +77,23 @@ https://<your-username>.github.io/<your-repo>/
 The workflow sets the base path from the repository name automatically, so it
 works no matter what you name the repo.
 
-### Using a custom domain?
-1. In `.github/workflows/deploy.yml`, change the build line to
-   `run: npm run build -- --base-href "/"`.
-2. Add a file `public/CNAME` containing just your domain (e.g. `ourwedding.com`).
-3. Configure the domain under **Settings → Pages → Custom domain**.
+### Custom domain
+This site is configured for **www.arianeerodrigo.site**:
+- `public/CNAME` holds the domain (published with every deploy, which is what
+  tells GitHub Pages to use it).
+- The build uses `--base-href "/"` (root of the domain).
+
+For it to resolve, add this DNS record at your domain registrar:
+
+| Type  | Name (host) | Value              |
+|-------|-------------|--------------------|
+| CNAME | `www`       | `rordigo.github.io` |
+
+(Optional, to also serve the bare `arianeerodrigo.site` and redirect it to
+`www`, add four `A` records for the apex pointing to `185.199.108.153`,
+`185.199.109.153`, `185.199.110.153`, `185.199.111.153`.)
+
+After DNS propagates, tick **Settings → Pages → Enforce HTTPS**.
 
 ### Prefer to deploy by hand?
 ```bash
