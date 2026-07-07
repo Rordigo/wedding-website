@@ -109,7 +109,7 @@ export const siteConfig: SiteConfig = {
   weddingDateISO: '2027-03-12T18:00:00',
   displayDate: 'Sexta-feira, 12 de março de 2027',
   displayTime: 'Às dezoito horas',
-  location: 'Toscana, Itália',
+  location: 'São Paulo - SP, Brasil',
   invitationLine: 'Junto de suas famílias, convidam você para celebrar o seu casamento',
 
   heroImage: '', // ex.: 'images/hero.jpg'
@@ -145,32 +145,24 @@ export const siteConfig: SiteConfig = {
 
   events: [
     {
-      title: 'A Cerimônia',
+      title: 'Cerimônia & Festa',
       icon: 'bi-heart',
-      time: '16h00 – 17h00',
-      venue: 'Capela de San Lorenzo',
-      address: 'Via delle Colline 12, Toscana, Itália',
-      mapUrl: 'https://maps.google.com',
-      note: 'Por favor, chegue 30 minutos antes para se acomodar.',
-    },
-    {
-      title: 'A Recepção',
-      icon: 'bi-cup-straw',
-      time: '18h00 – até o fim',
-      venue: 'Villa dei Cipressi',
-      address: 'Strada del Vino 8, Toscana, Itália',
-      mapUrl: 'https://maps.google.com',
-      note: 'Jantar, dança e celebração sob as estrelas.',
+      time: '18h00 – 01h00',
+      venue: 'Mansão Capricho',
+      address: 'Avenida Nova Cantareira, 4238 — Tucuruvi, São Paulo - SP, 02340-001',
+      mapUrl:
+        'https://www.google.com/maps/search/?api=1&query=Mans%C3%A3o+Capricho+-+Avenida+Nova+Cantareira+4238+Tucuruvi+S%C3%A3o+Paulo',
+      note: 'Recepção, cerimônia, jantar e festa — tudo no mesmo local.',
     },
   ],
 
   schedule: [
-    { time: '15h30', title: 'Chegada dos Convidados', description: 'Drinks de boas-vindas no terraço.', icon: 'bi-people' },
-    { time: '16h00', title: 'Cerimônia', description: 'O momento em que dizemos "sim".', icon: 'bi-heart' },
-    { time: '17h00', title: 'Hora do Coquetel', description: 'Canapés, música e fotografias.', icon: 'bi-cup-straw' },
-    { time: '18h30', title: 'Jantar', description: 'Um jantar à mesa com discursos.', icon: 'bi-egg-fried' },
-    { time: '20h30', title: 'Primeira Dança', description: 'Seguida de dança a noite toda.', icon: 'bi-music-note-beamed' },
-    { time: '23h30', title: 'Despedida', description: 'Uma despedida com estrelinhas para o casal.', icon: 'bi-stars' },
+    { time: '18h00', title: 'Recepção', description: 'Recepção e drinks de boas-vindas.', icon: 'bi-cup-straw' },
+    { time: '19h00', title: 'Cerimônia', description: 'O momento em que dizemos "sim".', icon: 'bi-heart' },
+    { time: '20h00', title: 'Jantar', description: 'Um jantar à mesa com discursos.', icon: 'bi-egg-fried' },
+    { time: '21h30', title: 'Primeira Dança', description: 'Nossa primeira dança como casal.', icon: 'bi-music-note-beamed' },
+    { time: '22h00', title: 'Festa', description: 'Música e dança a noite toda.', icon: 'bi-stars' },
+    { time: '01h00', title: 'Encerramento', description: 'Encerramento da celebração.', icon: 'bi-moon-stars' },
   ],
 
   gallery: [
@@ -185,7 +177,7 @@ export const siteConfig: SiteConfig = {
   rsvp: {
     intro:
       'Seria uma honra ter você celebrando conosco. Por favor, avise-nos se poderá comparecer.',
-    deadline: 'Por favor, confirme até 1º de agosto de 2026',
+    deadline: 'Por favor, confirme até 31 de dezembro de 2026',
     googleFormUrl: 'https://forms.gle/your-google-form-link', // ← cole aqui o link do seu Google Forms
   },
 
@@ -247,7 +239,7 @@ export const siteConfig: SiteConfig = {
     {
       question: 'Que horas devo chegar?',
       answer:
-        'Por favor, procure chegar até as 15h30 para encontrar seu lugar antes de a cerimônia começar, pontualmente às 16h00.',
+        'Por favor, procure chegar até as 18h00 para a recepção, antes de a cerimônia começar, às 19h00.',
     },
   ],
 
