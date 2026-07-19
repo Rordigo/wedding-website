@@ -92,6 +92,12 @@ export interface SiteConfig {
     gifts: PixGift[];
   };
 
+  /** Envio do cartão pelo checkout (formulário Web3Forms, sem backend). */
+  card: {
+    /** Access key do Web3Forms (https://web3forms.com), vinculada ao e-mail de destino. */
+    web3formsAccessKey: string;
+  };
+
   travel: {
     intro: string;
     items: EventDetail[];
@@ -180,6 +186,10 @@ export const siteConfig: SiteConfig = {
       { name: 'Uma taça de vinho', description: 'Para brindarmos à nova fase.', icon: 'bi-cup-straw', value: 10 },
       { name: 'Um pé de lavanda', description: 'Para florescer no nosso lar.', icon: 'bi-flower1', value: 12 },
     ],
+  },
+
+  card: {
+    web3formsAccessKey: '3054b242-ef88-41a9-a1e7-afed36780f5b', // ← cole aqui a access key do Web3Forms (https://web3forms.com)
   },
 
   travel: {

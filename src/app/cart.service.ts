@@ -8,6 +8,8 @@ export interface CartItem {
 
 interface StoredCart {
   items: { name: string; quantity: number }[];
+  lastOrder: { name: string; quantity: number }[];
+  cardName: string;
   cardMessage: string;
 }
 
@@ -23,6 +25,14 @@ export class CartService {
   private readonly _items = signal<CartItem[]>([]);
   readonly items = this._items.asReadonly();
 
+  /**
+   * Snapshot dos presentes no momento em que o pagamento é confirmado. O
+   * carrinho ativo é esvaziado logo em seguida, mas este snapshot preserva a
+   * lista para montar o e-mail do cartão. Limpo após enviar/cancelar o cartão.
+   */
+  private readonly _lastOrder = signal<CartItem[]>([]);
+  readonly lastOrder = this._lastOrder.asReadonly();
+
   /** Quantidade total de presentes selecionados (somando as quantidades). */
   readonly count = computed(() => this._items().reduce((n, i) => n + i.quantity, 0));
 
@@ -31,13 +41,23 @@ export class CartService {
     this._items().reduce((sum, i) => sum + i.gift.value * i.quantity, 0),
   );
 
+  /** Valor total em reais do último pedido confirmado. */
+  readonly lastOrderTotal = computed(() =>
+    this._lastOrder().reduce((sum, i) => sum + i.gift.value * i.quantity, 0),
+  );
+
+  /** Nome de quem envia o cartão (preenchido no checkout). */
+  readonly cardName = signal('');
+
   /** Mensagem do cartão escrita no checkout (persistida entre páginas). */
   readonly cardMessage = signal('');
 
   constructor() {
     this.restore();
-    // Persiste a seleção sempre que os itens ou a mensagem do cartão mudam.
-    effect(() => this.persist(this._items(), this.cardMessage()));
+    // Persiste o estado sempre que qualquer parte relevante muda.
+    effect(() =>
+      this.persist(this._items(), this._lastOrder(), this.cardName(), this.cardMessage()),
+    );
   }
 
   add(gift: PixGift): void {
@@ -77,45 +97,73 @@ export class CartService {
     this._items.update((items) => items.filter((i) => i.gift.name !== gift.name));
   }
 
-  /** Remove apenas os presentes, mantendo a mensagem do cartão. */
-  clearItems(): void {
-    this._items.set([]);
-  }
-
   quantityOf(gift: PixGift): number {
     return this._items().find((i) => i.gift.name === gift.name)?.quantity ?? 0;
   }
 
-  clear(): void {
+  /**
+   * Confirma o pagamento: guarda os presentes no snapshot e esvazia o carrinho
+   * ativo. A mensagem/nome do cartão são reiniciados para um cartão em branco.
+   */
+  confirmOrder(): void {
+    this._lastOrder.set(this._items());
     this._items.set([]);
+    this.cardName.set('');
     this.cardMessage.set('');
   }
 
-  /** Recarrega a seleção salva, casando os nomes com os presentes atuais. */
+  /** Limpa o snapshot e os campos do cartão (após enviar ou cancelar). */
+  clearOrder(): void {
+    this._lastOrder.set([]);
+    this.cardName.set('');
+    this.cardMessage.set('');
+  }
+
+  clear(): void {
+    this._items.set([]);
+    this._lastOrder.set([]);
+    this.cardName.set('');
+    this.cardMessage.set('');
+  }
+
+  /** Recarrega o estado salvo, casando os nomes com os presentes atuais. */
   private restore(): void {
     if (typeof localStorage === 'undefined') return;
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) return;
       const parsed = JSON.parse(raw) as StoredCart;
-      const items = (parsed.items ?? [])
-        .map((stored) => {
-          const gift = siteConfig.registry.gifts.find((g) => g.name === stored.name);
-          return gift && stored.quantity > 0 ? { gift, quantity: stored.quantity } : null;
-        })
-        .filter((i): i is CartItem => i !== null);
-      this._items.set(items);
+      this._items.set(this.hydrate(parsed.items));
+      this._lastOrder.set(this.hydrate(parsed.lastOrder));
+      this.cardName.set(parsed.cardName ?? '');
       this.cardMessage.set(parsed.cardMessage ?? '');
     } catch {
       // Estado salvo inválido — ignora e começa com um carrinho vazio.
     }
   }
 
-  private persist(items: CartItem[], cardMessage: string): void {
+  /** Converte itens salvos (nome + quantidade) em itens com o presente atual. */
+  private hydrate(stored: { name: string; quantity: number }[] | undefined): CartItem[] {
+    return (stored ?? [])
+      .map((s) => {
+        const gift = siteConfig.registry.gifts.find((g) => g.name === s.name);
+        return gift && s.quantity > 0 ? { gift, quantity: s.quantity } : null;
+      })
+      .filter((i): i is CartItem => i !== null);
+  }
+
+  private persist(
+    items: CartItem[],
+    lastOrder: CartItem[],
+    cardName: string,
+    cardMessage: string,
+  ): void {
     if (typeof localStorage === 'undefined') return;
     try {
       const data: StoredCart = {
         items: items.map((i) => ({ name: i.gift.name, quantity: i.quantity })),
+        lastOrder: lastOrder.map((i) => ({ name: i.gift.name, quantity: i.quantity })),
+        cardName,
         cardMessage,
       };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));

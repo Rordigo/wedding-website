@@ -126,9 +126,22 @@ type CheckoutStep = 'list' | 'payment' | 'card' | 'done';
             <div class="row justify-content-center">
               <div class="col-lg-6">
                 <div class="checkout-panel">
-                  <p class="text-muted text-center mb-3">
+                  <p class="text-muted text-center mb-4">
                     Se quiser, deixe uma mensagem carinhosa para os noivos.
                   </p>
+
+                  <label for="cardName" class="card-label">Seu nome</label>
+                  <input
+                    id="cardName"
+                    type="text"
+                    class="card-input"
+                    placeholder="Como você quer assinar o cartão"
+                    [value]="cart.cardName()"
+                    (input)="onNameInput($event)"
+                    [disabled]="sending()"
+                  />
+
+                  <label for="cardMessage" class="card-label mt-3">Mensagem</label>
                   <textarea
                     id="cardMessage"
                     class="card-textarea"
@@ -136,14 +149,35 @@ type CheckoutStep = 'list' | 'payment' | 'card' | 'done';
                     placeholder="Escreva o seu cartão…"
                     [value]="cart.cardMessage()"
                     (input)="onCardInput($event)"
+                    [disabled]="sending()"
                   ></textarea>
 
+                  @if (sendError()) {
+                    <p class="send-error mt-3">
+                      <i class="bi bi-exclamation-triangle me-2"></i>{{ sendError() }}
+                    </p>
+                  }
+
                   <div class="d-flex gap-2 mt-4">
-                    <button type="button" class="btn btn-wedding-outline flex-fill" (click)="skipCard()">
+                    <button
+                      type="button"
+                      class="btn btn-wedding-outline flex-fill"
+                      (click)="skipCard()"
+                      [disabled]="sending()"
+                    >
                       Não enviar cartão
                     </button>
-                    <button type="button" class="btn btn-wedding flex-fill" (click)="sendCard()">
-                      Enviar cartão
+                    <button
+                      type="button"
+                      class="btn btn-wedding flex-fill"
+                      (click)="sendCard()"
+                      [disabled]="sending()"
+                    >
+                      @if (sending()) {
+                        <span class="spinner-border spinner-border-sm me-1"></span> Enviando…
+                      } @else {
+                        Enviar cartão
+                      }
                     </button>
                   </div>
                 </div>
@@ -155,9 +189,16 @@ type CheckoutStep = 'list' | 'payment' | 'card' | 'done';
           @case ('done') {
             <div class="empty-state text-center mx-auto">
               <div class="done-check"><i class="bi bi-heart-fill"></i></div>
-              <p class="done-message">
-                Sua contribuição significa muito para nós. Mal podemos esperar para celebrar com você!
-              </p>
+              @if (cardSent()) {
+                <p class="done-message">
+                  Seu cartão foi enviado aos noivos! Sua contribuição significa muito para nós.
+                  Mal podemos esperar para celebrar com você!
+                </p>
+              } @else {
+                <p class="done-message">
+                  Sua contribuição significa muito para nós. Mal podemos esperar para celebrar com você!
+                </p>
+              }
               <a routerLink="/" class="btn btn-wedding">Voltar ao início</a>
             </div>
           }
@@ -285,19 +326,34 @@ type CheckoutStep = 'list' | 'payment' | 'card' | 'done';
       .cart-total span:last-child {
         color: var(--gold-dark);
       }
+      .card-label {
+        display: block;
+        font-weight: 700;
+        font-size: 0.9rem;
+        margin-bottom: 0.4rem;
+      }
+      .card-input,
       .card-textarea {
         width: 100%;
         border: 1px solid rgba(59, 58, 54, 0.15);
         border-radius: 0.6rem;
         padding: 0.75rem;
         font-family: var(--font-body);
-        resize: vertical;
         color: var(--ink);
         background: var(--cream);
       }
+      .card-textarea {
+        resize: vertical;
+      }
+      .card-input:focus,
       .card-textarea:focus {
         outline: none;
         border-color: var(--gold);
+      }
+      .send-error {
+        color: #c0553f;
+        font-size: 0.9rem;
+        margin-bottom: 0;
       }
       .pix-disclaimer {
         margin: 0 auto 1.5rem;
@@ -359,6 +415,9 @@ export class CheckoutPageComponent {
   readonly step = signal<CheckoutStep>('list');
   readonly qrDataUrl = signal('');
   readonly copied = signal(false);
+  readonly sending = signal(false);
+  readonly sendError = signal('');
+  readonly cardSent = signal(false);
 
   private readonly headings: Record<CheckoutStep, { eyebrow: string; title: string; icon: string }> = {
     list: { eyebrow: 'Quase lá', title: 'Checkout', icon: 'bi-bag-heart' },
@@ -394,6 +453,11 @@ export class CheckoutPageComponent {
     return 'R$ ' + value.toFixed(2).replace('.', ',');
   }
 
+  onNameInput(event: Event): void {
+    this.cart.cardName.set((event.target as HTMLInputElement).value);
+    if (this.sendError()) this.sendError.set('');
+  }
+
   onCardInput(event: Event): void {
     this.cart.cardMessage.set((event.target as HTMLTextAreaElement).value);
   }
@@ -408,20 +472,59 @@ export class CheckoutPageComponent {
   }
 
   confirmPayment(): void {
-    // Pagamento confirmado: esvazia o carrinho e segue para o cartão.
-    this.cart.clearItems();
-    this.cart.cardMessage.set('');
+    // Pagamento confirmado: guarda o snapshot dos presentes e esvazia o carrinho.
+    this.sendError.set('');
+    this.cart.confirmOrder();
     this.goToStep('card');
   }
 
-  sendCard(): void {
-    // TODO: integrar o envio do cartão quando o serviço/backend for definido.
-    this.finish();
+  async sendCard(): Promise<void> {
+    const name = this.cart.cardName().trim();
+    if (!name) {
+      this.sendError.set('Por favor, informe o seu nome para enviar o cartão.');
+      return;
+    }
+    const accessKey = this.cfg.card.web3formsAccessKey;
+    if (!accessKey) {
+      this.sendError.set('O envio de cartão ainda não está configurado.');
+      return;
+    }
+
+    this.sendError.set('');
+    this.sending.set(true);
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: accessKey,
+          subject: `[Casamento] Presente de ${name}`,
+          from_name: name,
+          Nome: name,
+          Presente: this.buildGiftsText(),
+          Mensagem: this.cart.cardMessage().trim() || '(sem mensagem)',
+        }),
+      });
+      const data = await response.json();
+      if (!response.ok || !data.success) {
+        throw new Error(data?.message ?? 'Falha no envio');
+      }
+      this.cardSent.set(true);
+      this.cart.clearOrder();
+      this.goToStep('done');
+    } catch {
+      this.sendError.set(
+        'Não foi possível enviar o cartão. Verifique sua conexão e tente novamente.',
+      );
+    } finally {
+      this.sending.set(false);
+    }
   }
 
   skipCard(): void {
-    this.cart.cardMessage.set('');
-    this.finish();
+    this.cardSent.set(false);
+    this.cart.clearOrder();
+    this.goToStep('done');
   }
 
   async copy(): Promise<void> {
@@ -434,9 +537,13 @@ export class CheckoutPageComponent {
     }
   }
 
-  private finish(): void {
-    this.cart.clear();
-    this.goToStep('done');
+  /** Monta o texto da seção "Presente" com os itens do último pedido. */
+  private buildGiftsText(): string {
+    const lines = this.cart
+      .lastOrder()
+      .map((i) => `${i.quantity}x ${i.gift.name} — ${this.formatBRL(i.gift.value * i.quantity)}`);
+    lines.push(`Total: ${this.formatBRL(this.cart.lastOrderTotal())}`);
+    return lines.join('\n');
   }
 
   private goToStep(step: CheckoutStep): void {
