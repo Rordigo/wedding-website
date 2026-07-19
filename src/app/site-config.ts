@@ -34,11 +34,11 @@ export interface GalleryItem {
   caption: string;
 }
 
-export interface RegistryItem {
+export interface PixGift {
   name: string;
   description: string;
-  url: string;
   icon: string;
+  value: number; // valor em reais, ex.: 12 ou 12.5
 }
 
 export interface FaqItem {
@@ -78,9 +78,18 @@ export interface SiteConfig {
     googleFormUrl: string; // cole aqui o link de compartilhamento do seu Google Forms
   };
 
+  /** Dados do recebedor usados para gerar o código Pix Copia e Cola. */
+  pix: {
+    chave: string;
+    nome: string;
+    cidade: string;
+  };
+
   registry: {
     intro: string;
-    items: RegistryItem[];
+    /** Mensagem exibida na página de presentes para envio de Pix avulso. */
+    directPixNote: string;
+    gifts: PixGift[];
   };
 
   travel: {
@@ -155,13 +164,21 @@ export const siteConfig: SiteConfig = {
     googleFormUrl: 'https://forms.gle/your-google-form-link', // ← cole aqui o link do seu Google Forms
   },
 
+  pix: {
+    chave: '+5511933383357',
+    nome: 'Rodrigo Anater',
+    cidade: 'Sao Paulo',
+  },
+
   registry: {
     intro:
-      'Sua presença já é o maior presente de todos. Mas, se desejar presentear, reunimos algumas ideias abaixo.',
-    items: [
-      { name: 'Cota de Lua de Mel', description: 'Ajude-nos a realizar a lua de mel dos nossos sonhos.', url: 'https://example.com', icon: 'bi-airplane-engines' },
-      { name: 'Lista para o Lar', description: 'Algumas coisas para o nosso primeiro lar juntos.', url: 'https://example.com', icon: 'bi-house-heart' },
-      { name: 'Doação para Caridade', description: 'Contribua para uma causa querida ao nosso coração.', url: 'https://example.com', icon: 'bi-heart-pulse' },
+      'Sua presença já é o maior presente. Mas, se desejar nos presentear, preparamos algumas opções de contribuição via Pix.',
+    directPixNote:
+      'Para enviar outros valores, sem a seleção de presente, pode fazer um Pix direto para 11933383357 (Rodrigo Chioca Anater).',
+    gifts: [
+      { name: 'Um cafezinho', description: 'Para as nossas manhãs juntos.', icon: 'bi-cup-hot', value: 5 },
+      { name: 'Uma taça de vinho', description: 'Para brindarmos à nova fase.', icon: 'bi-cup-straw', value: 10 },
+      { name: 'Um pé de lavanda', description: 'Para florescer no nosso lar.', icon: 'bi-flower1', value: 12 },
     ],
   },
 
@@ -219,3 +236,8 @@ export const siteConfig: SiteConfig = {
 
   footerMessage: 'Mal podemos esperar para celebrar com você.',
 };
+
+// Dados do recebedor Pix ficam imutáveis em tempo de execução: nem o código do
+// app nem o console do navegador conseguem sobrescrever a chave/nome/cidade.
+Object.freeze(siteConfig.pix);
+Object.freeze(siteConfig);

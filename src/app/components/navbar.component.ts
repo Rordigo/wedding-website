@@ -1,16 +1,19 @@
-import { Component, HostListener, signal } from '@angular/core';
+import { Component, HostListener, inject, signal } from '@angular/core';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
+import { filter } from 'rxjs';
 import { siteConfig } from '../site-config';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
+  imports: [RouterLink],
   template: `
     <nav
       class="navbar navbar-expand-lg fixed-top wedding-nav"
-      [class.scrolled]="scrolled()"
+      [class.scrolled]="scrolled() || !isHome()"
     >
       <div class="container">
-        <a class="navbar-brand" href="#home">{{ cfg.monogram }}</a>
+        <a class="navbar-brand" routerLink="/" fragment="home">{{ cfg.monogram }}</a>
 
         <button
           class="navbar-toggler"
@@ -26,21 +29,32 @@ import { siteConfig } from '../site-config';
 
         <div class="collapse navbar-collapse" id="navMenu">
           <ul class="navbar-nav ms-auto align-items-lg-center">
-            @for (link of links; track link.href) {
+            @for (link of links; track link.fragment) {
               <li class="nav-item">
                 <a
                   class="nav-link"
-                  [href]="link.href"
+                  routerLink="/"
+                  [fragment]="link.fragment"
                   data-bs-toggle="collapse"
                   data-bs-target="#navMenu"
                   >{{ link.label }}</a
                 >
               </li>
             }
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                routerLink="/presentes"
+                data-bs-toggle="collapse"
+                data-bs-target="#navMenu"
+                >Presentes</a
+              >
+            </li>
             <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
               <a
                 class="btn btn-wedding btn-sm"
-                href="#rsvp"
+                routerLink="/"
+                fragment="rsvp"
                 data-bs-toggle="collapse"
                 data-bs-target="#navMenu"
                 >Confirmar Presença</a
@@ -126,17 +140,27 @@ import { siteConfig } from '../site-config';
 export class NavbarComponent {
   readonly cfg = siteConfig;
   readonly scrolled = signal(false);
+  readonly isHome = signal(true);
+  private readonly router = inject(Router);
 
   readonly links = [
-    { label: 'Início', href: '#home' },
-    { label: 'Nossa História', href: '#story' },
-    { label: 'Detalhes', href: '#details' },
-    { label: 'Programação', href: '#schedule' },
-    { label: 'Galeria', href: '#gallery' },
-    { label: 'Hospedagem', href: '#travel' },
-    { label: 'Presentes', href: '#registry' },
-    { label: 'Dúvidas', href: '#faq' },
+    { label: 'Início', fragment: 'home' },
+    { label: 'Nossa História', fragment: 'story' },
+    { label: 'Detalhes', fragment: 'details' },
+    { label: 'Programação', fragment: 'schedule' },
+    { label: 'Galeria', fragment: 'gallery' },
+    { label: 'Hospedagem', fragment: 'travel' },
+    { label: 'Dúvidas', fragment: 'faq' },
   ];
+
+  constructor() {
+    this.router.events
+      .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
+      .subscribe((e) => {
+        const path = e.urlAfterRedirects.split('#')[0].split('?')[0];
+        this.isHome.set(path === '/' || path === '');
+      });
+  }
 
   @HostListener('window:scroll')
   onScroll(): void {
