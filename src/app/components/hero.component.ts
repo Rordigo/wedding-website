@@ -75,8 +75,8 @@ interface Countdown {
         color: #fff;
         background-color: var(--sage-dark);
         background-image:
-          radial-gradient(1200px 600px at 70% -10%, rgba(189, 154, 95, 0.45), transparent 60%),
-          linear-gradient(160deg, #6c7a5b 0%, #5e6d4f 45%, #47543b 100%);
+          radial-gradient(1200px 600px at 70% -10%, color-mix(in srgb, var(--gold) 45%, transparent), transparent 60%),
+          linear-gradient(160deg, var(--dark-from) 0%, var(--dark-mid) 45%, var(--dark-to) 100%);
         background-size: cover;
         background-position: center;
         overflow: hidden;

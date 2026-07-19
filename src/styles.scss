@@ -4,16 +4,18 @@
    ============================================================ */
 
 :root {
-  /* Palette — soft, romantic, timeless. Tweak to match your colours. */
-  --cream: #faf6f0;
-  --sand: #f1e9dd;
-  --blush: #efe1dc;
-  --sage: #8a9a7b;
-  --sage-dark: #5e6d4f;
-  --gold: #bd9a5f;
-  --gold-dark: #a07f45;
-  --ink: #3b3a36;
-  --muted: #8c857b;
+  /* Palette — "Coral & Peach" (site default). Warm coral/rose accents on
+     soft warm-white backgrounds. The four brand colours are #a75d5d,
+     #d3756b, #f0997d and #ffc3a1; the rest are derived neutrals. */
+  --cream: #fff8f4;
+  --sand: #fdeee6;
+  --blush: #ffc3a1;
+  --sage: #d3756b;
+  --sage-dark: #a75d5d;
+  --gold: #f0997d;
+  --gold-dark: #b85c4e;
+  --ink: #4a2f2f;
+  --muted: #9c807c;
   --white: #ffffff;
 
   /* Typography */
@@ -27,6 +29,68 @@
   --bs-body-color: var(--ink);
   --bs-link-color: var(--sage-dark);
   --bs-link-hover-color: var(--gold-dark);
+
+  /* Dark surfaces (hero, RSVP, footer). Derived from the palette so they
+     follow every theme automatically — no per-theme values needed.
+     --on-dark is the light champagne text/accent used on those surfaces. */
+  --dark-from: color-mix(in srgb, var(--sage-dark) 85%, #fff);
+  --dark-mid: var(--sage-dark);
+  --dark-to: color-mix(in srgb, var(--sage-dark) 78%, #000);
+  --footer-bg: color-mix(in srgb, var(--sage-dark) 66%, #000);
+  --on-dark: color-mix(in srgb, var(--gold) 55%, #fff);
+}
+
+/* ============================================================
+   Alternate palettes — for testing color schemes.
+   Toggled at runtime by <app-theme-switcher>, which sets
+   `data-theme` on <html>. Each block only redefines the raw
+   colours; typography and the Bootstrap mappings above reference
+   these vars, so they re-skin automatically.
+   The default (no data-theme) is the "Sage & Gold" palette above.
+   To remove the tester: delete these blocks, the theme-switcher
+   component, and its two lines in app.ts / app.html.
+   ============================================================ */
+:root[data-theme='blue'] {
+  --cream: #f7f8fa;  --sand: #e9eef2;  --blush: #e4ebf0;
+  --sage: #8fa6b8;   --sage-dark: #52708a;
+  --gold: #c8a97e;   --gold-dark: #a9895f;
+  --ink: #2f3a42;    --muted: #7d8791;  --white: #ffffff;
+}
+:root[data-theme='terracotta'] {
+  --cream: #fbf6f1;  --sand: #f3e6db;  --blush: #f0ddd0;
+  --sage: #c98b6b;   --sage-dark: #a85c3c;
+  --gold: #d19a5c;   --gold-dark: #b07a3e;
+  --ink: #40332b;    --muted: #927c6f;  --white: #ffffff;
+}
+:root[data-theme='blush'] {
+  --cream: #fdf7f7;  --sand: #f6e7e9;  --blush: #f2dde1;
+  --sage: #c98da0;   --sage-dark: #9c5f74;
+  --gold: #c9a267;   --gold-dark: #a97f4a;
+  --ink: #3f333a;    --muted: #918089;  --white: #ffffff;
+}
+:root[data-theme='burgundy'] {
+  --cream: #faf5f3;  --sand: #f0e2df;  --blush: #ecd8d6;
+  --sage: #a9636a;   --sage-dark: #7a2f38;
+  --gold: #c19a5b;   --gold-dark: #9f7b3f;
+  --ink: #362b2c;    --muted: #8c7a7a;  --white: #ffffff;
+}
+:root[data-theme='emerald'] {
+  --cream: #f5f8f5;  --sand: #e4ede6;  --blush: #dbe8de;
+  --sage: #4f8f6f;   --sage-dark: #2f5f45;
+  --gold: #c9a860;   --gold-dark: #a78542;
+  --ink: #263029;    --muted: #75847b;  --white: #ffffff;
+}
+:root[data-theme='navy'] {
+  --cream: #f8f8fa;  --sand: #e8eaf0;  --blush: #efe6e6;
+  --sage: #5c6b8a;   --sage-dark: #2f3c5c;
+  --gold: #c19a6b;   --gold-dark: #9f7a48;
+  --ink: #2a2f3a;    --muted: #7a808f;  --white: #ffffff;
+}
+:root[data-theme='sage'] {
+  --cream: #faf6f0;  --sand: #f1e9dd;  --blush: #efe1dc;
+  --sage: #8a9a7b;   --sage-dark: #5e6d4f;
+  --gold: #bd9a5f;   --gold-dark: #a07f45;
+  --ink: #3b3a36;    --muted: #8c857b;  --white: #ffffff;
 }
 
 html {
@@ -134,7 +198,7 @@ a {
   border-color: var(--gold-dark);
   color: #fff;
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(94, 109, 79, 0.25);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--sage-dark) 28%, transparent);
 }
 
 .btn-wedding-outline {

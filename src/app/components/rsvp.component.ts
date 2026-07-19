@@ -33,11 +33,11 @@ import { siteConfig } from '../site-config';
         color: #fff;
         background-color: var(--sage-dark);
         background-image:
-          radial-gradient(900px 500px at 20% 0%, rgba(189, 154, 95, 0.35), transparent 55%),
-          linear-gradient(160deg, #6c7a5b 0%, #5e6d4f 50%, #47543b 100%);
+          radial-gradient(900px 500px at 20% 0%, color-mix(in srgb, var(--gold) 35%, transparent), transparent 55%),
+          linear-gradient(160deg, var(--dark-from) 0%, var(--dark-mid) 50%, var(--dark-to) 100%);
       }
       .text-light-gold {
-        color: #e7cf9d !important;
+        color: var(--on-dark) !important;
       }
       .rsvp-intro {
         max-width: 34rem;
@@ -47,17 +47,17 @@ import { siteConfig } from '../site-config';
       .rsvp-deadline {
         font-family: var(--font-display);
         font-style: italic;
-        color: #e7cf9d;
+        color: var(--on-dark);
         margin-top: 1rem;
       }
       .ornament--light {
-        color: #e7cf9d;
+        color: var(--on-dark);
       }
       .ornament--light::before {
-        background: linear-gradient(to right, transparent, #e7cf9d);
+        background: linear-gradient(to right, transparent, var(--on-dark));
       }
       .ornament--light::after {
-        background: linear-gradient(to left, transparent, #e7cf9d);
+        background: linear-gradient(to left, transparent, var(--on-dark));
       }
       .btn-rsvp {
         background: #fff;
@@ -73,7 +73,7 @@ import { siteConfig } from '../site-config';
       }
       .btn-rsvp:hover,
       .btn-rsvp:focus {
-        background: #e7cf9d;
+        background: var(--on-dark);
         color: var(--ink);
         transform: translateY(-2px);
         box-shadow: 0 10px 26px rgba(0, 0, 0, 0.25);

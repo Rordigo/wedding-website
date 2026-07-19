@@ -29,13 +29,13 @@ import { siteConfig } from '../site-config';
   styles: [
     `
       .wedding-footer {
-        background: #3f4a34;
+        background: var(--footer-bg);
         color: rgba(255, 255, 255, 0.85);
         padding: 3.5rem 0 2.5rem;
       }
       .footer-monogram {
         font-size: 3rem;
-        color: #e7cf9d !important;
+        color: var(--on-dark) !important;
         line-height: 1;
         margin-bottom: 0.75rem;
       }
@@ -50,14 +50,14 @@ import { siteConfig } from '../site-config';
         margin-bottom: 0.25rem;
       }
       .footer-hashtag {
-        color: #e7cf9d;
+        color: var(--on-dark);
         font-weight: 700;
         letter-spacing: 0.06em;
       }
       .footer-rule {
         width: 60px;
         height: 1px;
-        background: rgba(231, 207, 157, 0.5);
+        background: color-mix(in srgb, var(--on-dark) 50%, transparent);
         margin: 1.75rem auto;
       }
       .footer-credit {
