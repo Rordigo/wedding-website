@@ -46,13 +46,6 @@ export interface FaqItem {
   answer: string;
 }
 
-export interface StoryMilestone {
-  title: string;
-  date: string;
-  text: string;
-  icon: string;
-}
-
 export interface SiteConfig {
   partnerOne: string;
   partnerTwo: string;
@@ -71,8 +64,8 @@ export interface SiteConfig {
 
   story: {
     heading: string;
-    intro: string;
-    milestones: StoryMilestone[];
+    /** A narrativa da história do casal — cada item é um parágrafo. */
+    paragraphs: string[];
   };
 
   events: EventDetail[];
@@ -116,30 +109,11 @@ export const siteConfig: SiteConfig = {
 
   story: {
     heading: 'Nossa História',
-    intro:
-      'Toda história de amor é bonita, mas a nossa é a nossa favorita. Aqui estão alguns dos momentos que nos trouxeram até aqui.',
-    milestones: [
-      {
-        title: 'Como Nos Conhecemos',
-        date: 'Primavera de 2019',
-        icon: 'bi-cup-hot',
-        text:
-          'Fomos apresentados por amigos em comum em uma pequena cafeteria no centro. Um café virou uma conversa de três horas, e nenhum de nós queria que aquilo terminasse.',
-      },
-      {
-        title: 'Nossa Primeira Viagem',
-        date: 'Verão de 2021',
-        icon: 'bi-airplane',
-        text:
-          'Um fim de semana espontâneo no litoral se tornou a viagem que nos fez perceber que queríamos conhecer o mundo inteiro juntos — lado a lado.',
-      },
-      {
-        title: 'O Pedido',
-        date: 'Inverno de 2025',
-        icon: 'bi-gem',
-        text:
-          'Em uma noite tranquila de inverno, no lugar do nosso primeiro encontro, um de nós se ajoelhou. A resposta, é claro, foi um sim sem hesitar.',
-      },
+    paragraphs: [
+      'A gente se conheceu como não se espera conhecer alguém com quem vai se casar. A gente se conheceu como aqueles segredos que a vida guarda bem escondidos, pra serem revelados na hora ideal. A gente se conheceu num Carnaval que não era Carnaval, em fevereiro de 2021. A pandemia ainda estava ali, mas já trazia uma trégua pros nossos corações saudosos de gente, de risadas e de vida! Saudosos do mar! E assim, nos conhecemos! Rumo à praia, Ju de motorista, Rayssa de copilota, e fomos em direção à praia de Itaguaré, do ladinho de Riviera.',
+      'Nesse dia, nos tornamos amigos e a nossa amizade só cresceu! Cresceu forte e desinteressada. Do jeito que grandes amizades se mantém. O Ro se tornou aluno de dança da Nani, formaram um grupo de amigos. E assim, nós dois, juntos, fizemos novos amigos, viajamos, dançamos, cantamos, e demos boas risadas! Nos ajudamos um bom tanto também.',
+      'E como tudo muda o tempo todo, a vida mudou em 2023. Diante de um convite desinteressado de jantar, a fim de provar a nova receita do Ro, entre conversas, vinhos, risadas e jogos de tarô, demos nosso primeiro beijo. Primeiro beijo, que viria acompanhado de tantos outros, e de tanto por vir! Até chegarmos aqui, hoje, escrevendo nossa história pra vocês.',
+      'Hoje, moramos juntos na nossa casa. Temos um quebra cabeças montado, café passado, um pé de lavanda, uma iogurteira e a Ginga, dormindo com a cabeça apoiada no nosso sapato enquanto toma sol. Temos vida acontecendo! Obrigada por fazerem parte de nossas vidas, e serem testemunhas da nossa amizade e do nosso amor.',
     ],
   },
 

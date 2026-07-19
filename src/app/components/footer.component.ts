@@ -18,6 +18,11 @@ import { siteConfig } from '../site-config';
           Feito com <i class="bi bi-heart-fill"></i> para {{ cfg.partnerOne }} &amp;
           {{ cfg.partnerTwo }}
         </p>
+        <p class="footer-attribution">
+          <a href="https://www.flaticon.com/free-icons/wedding" title="wedding icons"
+            >Wedding icons created by istar_design_bureau - Flaticon</a
+          >
+        </p>
       </div>
     </footer>
   `,
@@ -64,6 +69,19 @@ import { siteConfig } from '../site-config';
         color: #d98c8c;
         font-size: 0.75rem;
         margin: 0 0.15rem;
+      }
+      .footer-attribution {
+        font-size: 0.7rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0;
+      }
+      .footer-attribution a {
+        color: rgba(255, 255, 255, 0.45);
+        text-decoration: none;
+      }
+      .footer-attribution a:hover {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: underline;
       }
     `,
   ],
