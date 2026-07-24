@@ -6,9 +6,8 @@
  *  textos, datas, links e caminhos de imagem abaixo e o site inteiro atualiza.
  *
  *  Fotos: coloque suas imagens em  src/../public/images/  e referencie-as
- *  como  'images/sua-foto.jpg'. Qualquer item da galeria deixado com src: ''
- *  mostra um bloco decorativo no lugar, então o site fica com aparência
- *  finalizada mesmo antes de as fotos estarem prontas.
+ *  como  'images/sua-foto.jpg'. As faixas de fotos (photoBands) aparecem como
+ *  tiras decorativas entre as seções — cada faixa é uma lista de imagens.
  * ─────────────────────────────────────────────────────────────────────────
  */
 
@@ -29,10 +28,12 @@ export interface ScheduleItem {
   icon: string;
 }
 
-export interface GalleryItem {
-  src: string; // 'images/foto.jpg'  — deixe '' para um bloco decorativo
-  caption: string;
-}
+/**
+ * Faixas de fotos exibidas entre as seções da página. Cada faixa é uma lista
+ * de caminhos de imagem, ex.: ['images/01.jpg', 'images/02.jpg']. As faixas são
+ * distribuídas, em ordem, nos espaços entre as seções (veja home-page).
+ */
+export type PhotoBand = string[];
 
 export interface PixGift {
   name: string;
@@ -70,7 +71,7 @@ export interface SiteConfig {
 
   events: EventDetail[];
   schedule: ScheduleItem[];
-  gallery: GalleryItem[];
+  photoBands: PhotoBand[];
 
   rsvp: {
     intro: string;
@@ -107,6 +108,20 @@ export interface SiteConfig {
 
   footerMessage: string;
 }
+
+// Todas as fotos do casamento, em ordem (images/01.jpg … images/35.jpg).
+const ALL_PHOTOS: string[] = Array.from(
+  { length: 35 },
+  (_, i) => `images/${String(i + 1).padStart(2, '0')}.jpg`,
+);
+
+// Gera uma faixa com TODAS as fotos, começando na foto `start` (1-based) e
+// dando a volta. Assim cada faixa mostra todas as fotos, só que com um offset
+// diferente — e a rolagem contínua faz todas passarem.
+const bandFrom = (start: number): string[] => {
+  const i = start - 1;
+  return [...ALL_PHOTOS.slice(i), ...ALL_PHOTOS.slice(0, i)];
+};
 
 export const siteConfig: SiteConfig = {
   partnerOne: 'Ariane',
@@ -154,13 +169,17 @@ export const siteConfig: SiteConfig = {
     { time: '01h00', title: 'Encerramento', description: 'Encerramento da celebração.', icon: 'bi-moon-stars' },
   ],
 
-  gallery: [
-    { src: '', caption: 'O dia em que ficamos noivos' },
-    { src: '', caption: 'Nossas primeiras férias juntos' },
-    { src: '', caption: 'Manhãs de domingo' },
-    { src: '', caption: 'Comemorando com a família' },
-    { src: '', caption: 'Aventuras pelo mundo' },
-    { src: '', caption: 'Só nós dois' },
+  // Uma faixa por espaço entre as seções (7 espaços). Cada faixa contém todas
+  // as fotos, rolando devagar para a esquerda, mas começando em uma foto
+  // diferente. Os números de início pulam pela lista para variar as vizinhas.
+  photoBands: [
+    bandFrom(1),
+    bandFrom(21),
+    bandFrom(6),
+    bandFrom(26),
+    bandFrom(11),
+    bandFrom(31),
+    bandFrom(16),
   ],
 
   rsvp: {

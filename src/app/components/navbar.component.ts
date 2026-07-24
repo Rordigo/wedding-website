@@ -148,7 +148,6 @@ export class NavbarComponent {
     { label: 'Nossa História', fragment: 'story' },
     { label: 'Detalhes', fragment: 'details' },
     { label: 'Programação', fragment: 'schedule' },
-    { label: 'Galeria', fragment: 'gallery' },
     { label: 'Hospedagem', fragment: 'travel' },
     { label: 'Dúvidas', fragment: 'faq' },
   ];
